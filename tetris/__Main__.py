@@ -5,8 +5,8 @@ import os
 import sys
 import curses
 #import locale
-from __game__ import *
-from __welcome__ import *
+from .__game__ import *
+from .__welcome__ import *
 
 class Main:
     ### FIELDS and SETUP ###

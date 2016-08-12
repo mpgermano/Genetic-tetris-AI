@@ -7,7 +7,7 @@
 ###			IMPLEMENT LINE CLEARING
 
 from random import randint
-from __setup__ import *
+from .__setup__ import *
 
 class Game:
 
@@ -15,7 +15,7 @@ class Game:
 	NUM_PIECES = PIECES.num_pieces
 	TIME = 0.1
 
-	def __init__(self, rows=23, columns=10):
+	def __init__(self, rows=23, columns=8):
 		self.board = [[0 for c in range(columns)] for r in range(rows)]
 		self.emptyBoard = self.board
 		self.landed = [[0 for c in range(columns)] for r in range(rows)]
@@ -109,7 +109,7 @@ class Game:
 						return
 		self.currPiece.shape = nextRotation
 
-	def landPiece(self):
+	def landPiece(self, normal=True):
 		p = self.currPiece
 		shapeRows = range(self.currPiece.getHeight())
 		shapeColumns = range(self.currPiece.getWidth())
@@ -120,7 +120,8 @@ class Game:
 					row = r + self.currPiece.topLeft.row
 					col = c + self.currPiece.topLeft.col
 					self.landed[row][col] = self.currPiece.shape[r][c]
-		self.clearLines()
+		if normal:
+			self.clearLines()
 
 	def clearLines(self):
 		animation = []

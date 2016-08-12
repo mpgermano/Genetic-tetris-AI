@@ -1,30 +1,22 @@
-tetris-terminal-game
-====================
+Genetric AI Tetris
+=================
+Michael Germano
+August, 2016
+Written in Python3.5
 
-Tetris Clone.  Runs in terminal.  Implemented in Python using ncurses library.
+Built using the tetris terminal game from Eric Pai, located at
+https://github.com/epai/tetris-terminal-game
 
-***IMPORTANT:  MUST HAVE PYTHON3 INSTALLED TO RUN!***
-
-to run, type:
-python3 tetris.py
-
-Objective:  
-Clear lines by placing tetris pieces strategically.  
-If the pieces stack up to the top, you lose.  
-Try to get to level 11!
-
-Keyboard inputs:
-"up arrow" - rotate piece
-"down arrow" - make piece fall faster
-"right arrow" - move piece right
-"left arrow" - move piece left
-
-"p" - pause game
-"q" - quit game
-"m" - access menu (includes keyboard input legend)
-
-Thanks for playing!
-Eric Pai,
-Main programmer and designer (Did everything)
-
-p.s. What was my motivation?  A friend told me that animation in the terminal couldn't be done.  I wanted to prove him wrong, and then some.  So I implemented a full functioning tetris in the terminal. :)
+### Project Breakdown
+- `ai.py`:
+     - analyzes gameboard, calculating all possible moves and subsequent moves based off of the current and next game piece.
+     - calculate the score of each possible move based off of 
+        - lines formed
+        - aggregate height
+        - the number of holes
+        - overall bumpiness
+    - execute the best move
+- `runAI.py`:
+    - script to start the game and AI
+- `tetris` dir:
+    - terminal tetris game created by Eric Pai
