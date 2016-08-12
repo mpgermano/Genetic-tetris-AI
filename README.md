@@ -4,8 +4,7 @@ Michael Germano
 August, 2016
 Written in Python3.5
 
-Built using the tetris terminal game from Eric Pai, located at
-https://github.com/epai/tetris-terminal-game
+Built using the tetris terminal game from Eric Pai
 
 ### Project Breakdown
 - `ai.py`:
