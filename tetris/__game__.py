@@ -15,7 +15,7 @@ class Game:
 	NUM_PIECES = PIECES.num_pieces
 	TIME = 0.1
 
-	def __init__(self, rows=23, columns=8):
+	def __init__(self, rows=23, columns=10):
 		self.board = [[0 for c in range(columns)] for r in range(rows)]
 		self.emptyBoard = self.board
 		self.landed = [[0 for c in range(columns)] for r in range(rows)]
@@ -28,7 +28,7 @@ class Game:
 		self.clearLinesAnimation = None
 		self.clearLinesBoolean = False
 		self.score = 0
-		self.level = 1
+		self.level = 10
 
 	def newPiece(self):
 		self.currPiece = self.nextPiece

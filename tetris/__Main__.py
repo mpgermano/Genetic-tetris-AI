@@ -1,6 +1,6 @@
 # Eric Pai
 # Spring 2014
-
+import time
 import os
 import sys
 import curses
@@ -134,6 +134,8 @@ class Main:
                 last_move = -1
             elif c == curses.KEY_RIGHT: # moves piece to the right
                 last_move = 1
+            elif c == ord(' '):
+               pass
             elif not shape_change and c == curses.KEY_UP: # rotates piece
                 self.g.rotatePiece()
                 shape_change = True
@@ -207,7 +209,7 @@ class Main:
             self.stdscr.addstr(i + 5, 53, nextPieceLines[i])
         if self.g.clearedLines - self.level_constant*self.g.level >= 0:
             self.down_constant -= self.level_decrement
-            self.g.level += 1
+            self.g.level += 0
             if self.g.level == 11:
                 self.doWin()
 
@@ -291,9 +293,9 @@ class Main:
         self.g = Game()
         self.has_landed = True
         self.down_counter = 1
-        self.down_constant = 100
-        self.level_constant = 5
-        self.level_decrement = 10
+        self.down_constant = 65
+        self.level_constant = 1
+        self.level_decrement = 10000
         self.restart = False
 
     def doFinish(self):

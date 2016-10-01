@@ -8,7 +8,12 @@ from threading import Thread
 
 class AI:
 	
-	def __init__(self):
+	def __init__(self, LINES_CLEARED_MULTIPLIER, AGGREGATE_HEIGHT_MULTIPLIER, HOLES_MULTIPLIER, BUMPINESS_MULTIPLIER):
+		
+		self.linesClearedMult = LINES_CLEARED_MULTIPLIER
+		self.agHeightMult = AGGREGATE_HEIGHT_MULTIPLIER
+		self.holesMult = HOLES_MULTIPLIER
+		self.bumpinessMult = BUMPINESS_MULTIPLIER
 
 		self.keyboard = PyKeyboard()
 		self.tetris = Main()
@@ -44,7 +49,7 @@ class AI:
 			self.keyboard.tap_key('Down')
 		
 
-		time.sleep(0.5)
+		time.sleep(2)
 		self.keyboard.tap_key('n')
 		
 	def calculateMove(self):
@@ -152,12 +157,6 @@ class AI:
 
 	def calculateMoveScore(self, move):
 		
-		# Arbitrary constants
-		# Todo: replace these values with those found from genetic algorithm
-		linesClearedMultiplier = 1
-		agHeightMultiplier = -0.50
-		holesMultiplier = -0.30
-		bumpinessMultiplier = -0.15
 		
 		lines = self.calculateLinesMade(move['board'])
 		result = self.calculateAggregateHeightAndBumpiness(move['board'])
@@ -165,8 +164,8 @@ class AI:
 		bumpiness = result[1]
 		holes = self.calculateHoles(move['board'])
 
-		score = (lines * linesClearedMultiplier) + (agHeight * agHeightMultiplier) \
-		+ (holes * holesMultiplier) + (bumpiness * bumpinessMultiplier) + 1000
+		score = (lines * self.linesClearedMult) + (agHeight * self.agHeightMult) \
+		+ (holes * self.holesMult) + (bumpiness * self.bumpinessMult) + 1000
 		
 		if score < 0:
 			score = 0
@@ -248,11 +247,8 @@ class AI:
 		return holes
 		
 	def executeMove(self, move):
-		
-		if self.tetris.g.level == 10:
-			sleepTime = 0.1
-		else:
-			sleepTime = 0.2
+		start = time.time()
+		sleepTime = 0.2
 	
 		if self.tetris.g.currPiece.topLeft.col < move['topLeftCol']:
 			direction = 'Right'
@@ -260,6 +256,9 @@ class AI:
 			direction = 'Left'
 		
 		while self.tetris.g.currPiece.currRotation != move['rotationIndex']:
+			if time.time() >= start + 5:
+				return
+
 			if self.tetris.g.gameOver:
 				return
 				
@@ -267,6 +266,9 @@ class AI:
 			time.sleep(sleepTime)
 
 		while self.tetris.g.currPiece.topLeft.col != move['topLeftCol']:
+			if time.time() >= start + 5:
+				return
+
 			if self.tetris.g.gameOver:
 				return
 			self.keyboard.tap_key(direction)
@@ -274,6 +276,9 @@ class AI:
 	
 		
 		while self.tetris.g.currPiece.topLeft.row < move['topLeftRow'] - 1:
+			if time.time() >= start + 5:
+				return
+
 			if self.tetris.g.gameOver:
 				return
 			self.keyboard.tap_key('Down')
