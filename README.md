@@ -14,12 +14,12 @@ Built using the tetris terminal game from Eric Pai
 
 ### Project Breakdown
 - `ai.py`:
-     - analyzes gameboard, calculating all possible moves and subsequent moves based off of the current and next game piece.
+    - analyzes gameboard, calculating all possible moves and subsequent moves based off of the current and next game piece.
     - calculates the score of each possible move based off of
-      - lines formed
-      - aggregate height
-      - the number of holes
-      - overall bumpiness
+        - lines formed
+        - aggregate height
+        - the number of holes
+        - overall bumpiness
     - executes the best move
 - `runAI.py`:
    - script to start the game and AI
